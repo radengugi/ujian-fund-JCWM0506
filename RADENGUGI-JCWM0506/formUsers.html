@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Form Users</title>
+    <style>
+        .container {
+            width: 80%;
+            border: 1px solid black;
+            margin: 10vh auto;
+        }
+
+        input {
+            border-radius: 2%;
+            margin-right: 2vw;
+        }
+
+        table,
+        th,
+        td {
+            border: 1 px solid black;
+            border-collapse: collapse;
+            padding: 0.5vw;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" style="background-color: powderblue;">
+        <h1>FORM USERS</h1>
+        <form>
+            <tr>
+                <td><input type="text" id="username" placeholder="username"></td>
+                <td><input type="text" id="email" placeholder="email"></td>
+                <td>role
+                    <select id="role">
+                        <option value="user">user</option>
+                        <option value="admin">admin</option>
+                    </select>
+                </td>
+                <br><br>
+                <td><input type="button" value="ADD USER" onclick="onBtnAddUser()"></td>
+            </tr>
+        </form>
+        <h1>USERS DATA</h1>
+        <form>
+            <table>
+                <thead>
+                    <th>No.</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Action</th>
+                </thead>
+                <tbody id="list-user">
+
+                </tbody>
+            </table>
+        </form>
+    </div>
+</body>
+<script>
+    let data = [
+        {
+            username: 'alee',
+            email: 'alee@gmail.com',
+            role: 'admin'
+        },
+        {
+            username: 'jenie',
+            email: 'jenniebp@gmail.com',
+            role: 'user'
+        },
+        {
+            username: 'elsa',
+            email: 'elsa@disney.com',
+            role: 'user'
+        }
+    ]
+
+    class user {
+        constructor(_username, _email, _role) {
+            this.username = _username
+            this.email = _email
+            this.role = _role
+        }
+    }
+
+    function onBtnAddUser() {
+        let username = document.getElementById("username").value
+        let email = document.getElementById("email").value
+        let role = document.getElementById("role").value
+        
+        data.push(new user(username, email, role))
+        console.table(data)
+        
+        document.getElementById("username").value = null
+        document.getElementById("email").value = null
+        document.getElementById("role").value = null
+        printData()
+    }
+
+    function printData(index, dataUser = data) {
+        let inUser = dataUser.map((item, idx) => {
+            if (index == idx) {
+                return `<tr>
+                    <td><input id="newUserName" type="text" value="${item.username}"></td>
+                    <td><input id="newEmail" type="text" value="${item.email}"></td>
+                    <td>
+                        <select id="newRole" value="${item.role}">
+                            <option value="user">user</option>
+                            <option value="admin">admin</option>
+                        </select>
+                    </td>
+                    <td><button type="button" value="Save" onclick="onBtnSave()">Save<button type="button" value="Cancel" onclick="onBtnCancel()">Cancel</td>
+                    </tr>`
+            } else {
+                return `<tr>
+                    <td>${idx + 1}</td>
+                    <td>${item.username}</td>
+                    <td>${item.email}</td>
+                    <td>${item.role}</td>
+                    <td><button type="button" value="Edit" onclick="onBtnEdit(${idx})">Edit<button type="button" value="Delete" onclick="onBtnDelete(${idx})">Delete</td>
+                    </tr>`
+            }
+        })
+        document.getElementById("list-user").innerHTML = inUser.join('')
+    }
+
+    // Delete
+    function onBtnDelete(index) {
+        data.splice(index, 1)
+        printData()
+    }
+
+    // Edit
+    function onBtnEdit(index) {
+        printData(index)
+    }
+
+    // Save
+    function onBtnSave() {
+        let newUserName = document.getElementById("newUserName").value
+        let newEmail = document.getElementById("newEmail").value
+        let newRole = document.getElementById("newRole").value
+
+        let save = confirm('Save Data ?')
+        if (save == true) {
+            onBtnDelete()
+            data.push(new user(newUserName, newEmail, newRole))
+            printData()
+        }else{
+            alert('Batal melakukan perubahan')
+        }
+    }
+    printData()
+
+    // Cancel
+    function onBtnCancel(){
+        printData()
+    }
+
+
+</script>
+
+</html>

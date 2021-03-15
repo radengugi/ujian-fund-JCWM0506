@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pattern</title>
+</head>
+
+<body>
+    <h1>Pattern</h1>
+    <input type="text" name="textInput" id="textInput" placeholder="Masukkan Angka">
+    <button id="button1" onclick="ganjilPtn()">GANJIL</button>
+    <button id="button1" onclick="hurufPtn()">HURUF</button><br>
+    <h1>RESULT :</h1>
+    <p id="output"></p>
+
+    <script>
+        function ganjilPtn() {
+            var n = document.getElementById("textInput").value
+            var result = ''
+            var inputP = document.getElementById("output")
+            console.log(inputP)
+
+            var a = 1
+            for (var i = 1; i <= n; i++) {
+                for (var j = 0; j < i; j++) {
+                    result += `${a} `
+                    a = a + 2
+                }
+                result += "<br>"
+            }
+            inputP.innerHTML = result
+        }
+
+        function hurufPtn() {
+            var n = document.getElementById("textInput").value
+            var result = ''
+            var inputP = document.getElementById("output")
+            console.log(inputP)
+            var a = 1
+            for (var i = 1; i < n; i++) {
+                for (var j = 0; j < i; j++) {
+                    var ganjil = String.fromCharCode(a + 65)
+                    result += `${ganjil} `
+                    a = a + 2
+                }
+                result += "<br>"
+            }
+            inputP.innerHTML = result
+        }
+
+
+    </script>
+</body>
+
+</html>

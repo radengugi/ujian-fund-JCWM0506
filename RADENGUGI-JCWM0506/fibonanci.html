@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fibonanci</title>
+</head>
+<body>
+    <h2>DERET FIBONANCI</h2>
+    <div>
+        <form>
+            <label>Masukkan Angka :</label>
+            <input type="text" id="textInput" placeholder="Masukkan Angka"></input><br>
+            <input type="button" id="show" value="SHOW"></input>
+            <input type="button" id="ganjil" value="GANJIL"></input>
+            <input type="button" id="genap" value="GENAP"></input>
+        </form>
+        <h2>RESULT :</h2>
+        <p id="output"></p>
+    </div>
+    
+    <script>
+
+        function fibonanci (){
+            var numb = document.getElementById("textInput").value
+            var result = ''
+            var hitung = ''
+
+            let n1 = 0
+            let n2 = 1
+            nextTerm = 0
+
+            if(input == 'genap'){
+                var total = 0
+            }else if(input == 'ganjil'){
+                var total = 1
+            }
+
+            var text = `${n1} ${n2}`
+            while (nextTerm <= numb){
+                nextTerm = n1 + n2
+                if(nextTerm > numb){
+                    break
+                }
+                n1 = n2
+                n2 = nextTerm
+                if(input == 'kosong'){
+                    text += `${nextTerm}`
+                }else if(input == 'ganjil'){
+                    if(nextTerm % 2 == 1){
+                        hitung += '1 + ' + String(nextTerm)
+                        total += nextTerm
+                        hasil = hitung + ' = ' + total
+                    }
+                }else if(input == 'genap'){
+                    
+                }
+            }
+
+        }
+
+    </script>
+</body>
+</html>
